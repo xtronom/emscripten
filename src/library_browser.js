@@ -1230,8 +1230,8 @@ var LibraryBrowser = {
 
   // To avoid creating worker parent->child chains, always proxies to execute on the main thread.
   emscripten_create_worker__proxy: 'sync',
-  emscripten_create_worker__sig: 'ii',
-  emscripten_create_worker: function(url) {
+  emscripten_create_worker__sig: 'iiii',
+  emscripten_create_worker: function(url, onerror, arg) {
     url = UTF8ToString(url);
     var id = Browser.workers.length;
     var info = {
@@ -1240,6 +1240,9 @@ var LibraryBrowser = {
       awaited: 0,
       buffer: 0,
       bufferSize: 0
+    };
+    info.worker.onerror = function info_worker_onerror(ev) {
+      if (onerror) {{{ makeDynCall('vi', 'onerror') }}}(arg);
     };
     info.worker.onmessage = function info_worker_onmessage(msg) {
       if (ABORT) return;

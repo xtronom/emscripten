@@ -124,7 +124,8 @@ void emscripten_lazy_load_code(void);
 
 typedef int worker_handle;
 
-worker_handle emscripten_create_worker(const char *url);
+typedef void (*em_worker_error_func)(void*);
+worker_handle emscripten_create_worker(const char *url, em_worker_error_func onerror, void *arg);
 void emscripten_destroy_worker(worker_handle worker);
 
 typedef void (*em_worker_callback_func)(char*, int, void*);
