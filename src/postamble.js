@@ -401,7 +401,9 @@ var workerResponded = false, workerCallbackId = -1;
     }
 
     workerResponded = false;
-    workerCallbackId = msg.data['callbackId'];
+    if (msg.data['callbackId'] != -1) {
+      workerCallbackId = msg.data['callbackId'];
+    }
     if (data) {
       func(buffer, data.length);
     } else {
