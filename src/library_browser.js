@@ -1315,7 +1315,6 @@ var LibraryBrowser = {
     }
   },
 
-#if BUILD_AS_WORKER
   emscripten_worker_respond_provisionally__proxy: 'sync',
   emscripten_worker_respond_provisionally__sig: 'vii',
   emscripten_worker_respond_provisionally: function(data, size) {
@@ -1348,7 +1347,6 @@ var LibraryBrowser = {
       postMessage(transferObject);
     }
   },
-#endif
 
   emscripten_get_worker_queue_size__proxy: 'sync',
   emscripten_get_worker_queue_size__sig: 'i',
